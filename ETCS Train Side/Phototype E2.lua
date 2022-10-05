@@ -1,16 +1,19 @@
 @name ETCS train side
-@inputs Nowspeed Nextspeed W S A D Space Deadman SpeedKMH Active
-@outputs Brake Emerbrake Speed LimitSpeed Buzzer BuzzerEmer Sector ReadM Nextlimit EmerbrakeCounter Forward Reverse
-Deadtime = 5000
+@inputs  Nowspeed Nextspeed W S A D Space Deadman SpeedKMH Active
+@outputs Brake Emerbrake Speed LimitSpeed Buzzer BuzzerEmer Sector ReadM Nextlimit EmerbrakeCounter Forward Reverse WriteNow WriteNext ReadNow ReadNext
+Deadtime = 120000
 Sector = 1
 ReadM = 1
 Buzzer = 0
-Recev = Nowspeed
+
+
 Speed = SpeedKMH
-LimitSpeed = Recev
+LimitSpeed = Nowspeed
 Nextlimit = Nextspeed
 Forward = W * 500
 Reverse = S * 500
+ReadNext = 1
+ReadNext =1
 
 
 if(Active != 1){
@@ -36,7 +39,7 @@ if(clk("Emerapply")){
     Buzzer = 100
     EmerbrakeCounter = 1
 }
-if(EmerbrakeCounter == 1){
+if(EmerbrakeCounter == 1 && Active == 1){
     Emerbrake = 100
     Buzzer = 100
     EmerbrakeCounter = 1
@@ -53,12 +56,12 @@ elseif(LimitSpeed <= SpeedKMH && LimitSpeed+10 <= SpeedKMH){
     EmerbrakeCounter = 1
     
 }
-if(LimitSpeed >= SpeedKMH && LimitSpeed+10 >= SpeedKMH && EmerbrakeCounter == 0 && Active == 1){
+if(LimitSpeed >= SpeedKMH && LimitSpeed+10 >= SpeedKMH && EmerbrakeCounter == 0 && Active == 1 && Nextlimit >= SpeedKMH && Nextlimit+10 >= SpeedKMH){
     Emerbrake = 0
     Brake = 0
     BuzzerEmer = 0
 }
-if(EmerbrakeCounter == 1 && SpeedKMH <= 1 && Active == 1 || Space >= 1){
+if(EmerbrakeCounter == 1 && SpeedKMH <= 1 || Space >= 1){
     EmerbrakeCounter = 0
     Emerbrake = 0
     Brake = 0
@@ -77,10 +80,5 @@ if(LimitSpeed == 0 && SpeedKMH <= 3){
 if(SpeedKMH <= 2){ 
     Brake = 100
 }
-if(Nextlimit <= Nowspeed && SpeedKMH >= Nextlimit && SpeedKMH <= Nextlimit+10 && Active == 1 ){
-    Brake = 100
-}
-elseif(Nextlimit <= Nowspeed && SpeedKMH >= Nextlimit && SpeedKMH >= Nextlimit+10 && Active == 1 ){
-    Emerbrake = 100
-    BuzzerEmer = 100
-}
+
+
