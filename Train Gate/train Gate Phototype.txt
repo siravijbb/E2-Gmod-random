@@ -1,55 +1,47 @@
 @name Railgate Prototype
-@inputs Trigger  Timmers Consttime Feedback
-@outputs Gate   TStart ResetG SoundP 
+@inputs Trigger  Timmers Consttime Feedback Sensor1 Sensor2 ResetGG Downnow
+@outputs Gate   TStart ResetG SoundP ETCSOutspeed
 
 Consttime = Consttime * 1000
 Internalcounter1 = 0
 Internalcounter2 = 0
    RGBCO = 0
+if (Sensor1 >= 50 && Sensor2 >= 50 ){ Acti = 1} else { Acti = 0}
 if (Trigger > 0){
-    Internalcounter1 = -1
-    print("play")
-    Gate = 0
+    timer("delay",10000)
+    print("Started")
     
+    Gate = 50
     SoundP = 100
     ResetG = 0
+    ETCSOutspeed = 20
+
+    
 
 }
-if (Internalcounter1 == -1){
-    timer("delay",10000)
-
+if(clk("delay") || Downnow >= 1){
+    Internalcounter1 = 2
 }
-if(clk("delay") ){
+if(Internalcounter1 == 2  ) {
+ 
     stopAllTimers()
-    Internalcounter = 0
     Gate = -50
-    print("Stoped")
+    print("Down")
     SoundP = 100
-    Internalcounter1 = 1
+    ETCSOutspeed = 120
+    timer("timecross",20000)
+    Internalcounter1 == 0
 
            }
 
-if (Internalcounter1 == 1){
-    Gate = -45
-    timer("timecross",Consttime)
-    timer("BingBong",1000)
-    ResetG = 0
 
-}
-if(clk("timecross") ){
+if(clk("timecross") || ResetGG >= 1) {
     stopAllTimers()
-    Internalcounter = 0
     Gate = 50
-    print("Stoped")
+    print("End")
     SoundP = 0
     ResetG = 1
+    ETCSOutspeed = 0
 
            }
-if(clk("BingBong")){
-    SoundP = 100
-    Gate = -50
-    Internalcounter2 = 1
-    timer("BingBong",1000)
-    timer("RGB",1000)
 
-}
