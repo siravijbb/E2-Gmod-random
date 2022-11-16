@@ -1,51 +1,51 @@
 @name Thai-Crossing Sign
 @inputs Triger Time
-@outputs Car_timmer Cross_timer timmer_start cDown redCar redCross yellowCar  greenCar greenCross 
+@outputs Cartimmer Crosstimer Timmerstart CDown RedCar RedCross YellowCross GreenCar GreenCross 
 
 NormalTime = 10000
-mutiPly = 1
-cDown = 10
-cU = 10
+MutiPly = 1
+CDown = 10
+CU = 10
 
 if(Triger == 1){
-    active = 1
+    Active = 1
 }
-if(active == 1){
-    timmer_start = 1
+if(Active == 1){
+    Timmerstart = 1
     timer("Cross time",NormalTime)
     timer("Auto",1000)
 }
-if(clk("Auto") && cDown >= -4){
-    cDown -= 1
-    cU -= 1
+if(clk("Auto") && CDown >= -4){
+    CDown -= 1
+    CU -= 1
     timer("Auto",1000)
 }
-if(cDown >= 0){
-    redCar == 0
-    redCross = 255
-    greenCar = 255
+if(CDown >= 0){
+    RedCar == 0
+    RedCross = 255
+    GreenCar = 255
 }
-if(cU == 0){
-    cU = 3
+if(CU == 0){
+    CU = 3
 }
-elseif(cDown <= 0 >= -3){
-    yellowCar == 255
-    redCar == 0
+elseif(CDown <= 0 >= -3){
+    YellowCross = 255
+    RedCar = 0
 }
-if(cDown <= -3){
-    cU = 10
-    redCar = 255
-    yellowCar = 0
-    greenCross = 255
+if(CDown <= -3){
+    CU = 10
+    RedCar = 255
+    YellowCross = 0
+    GreenCross = 255
 }
-if(cU >= 10 && cU >= 0 && greenCross >= 200){
+if(CU >= 10 && CU >= 0 && GreenCross >= 200){
     timer("GC",1000)
 }
 if(clk"GC"){
-    cU -= 1
+    CU -= 1
 }
-if(cU <= 0 && greenCross >= 200){
-    redCross = 255
-    greenCar = 255
+if(CU <= 0 ){
+    RedCross = 255
+    GreenCar = 255
     active = 0
 }
