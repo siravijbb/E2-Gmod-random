@@ -1,6 +1,6 @@
 @name Thai-Crossing Sign
 @inputs Triger Time
-@outputs Car_timmer Cross_timer timmer_start cDown redCar redCross yellowCar yellowCross greenCar greenCross 
+@outputs Car_timmer Cross_timer timmer_start cDown redCar redCross yellowCar  greenCar greenCross 
 
 NormalTime = 10000
 mutiPly = 1
@@ -33,6 +33,19 @@ elseif(cDown <= 0 >= -3){
     redCar == 0
 }
 if(cDown <= -3){
-    
+    cU = 10
+    redCar = 255
+    yellowCar = 0
+    greenCross = 255
 }
- 
+if(cU >= 10 && cU >= 0 && greenCross >= 200){
+    timer("GC",1000)
+}
+if(clk"GC"){
+    cU -= 1
+}
+if(cU <= 0 && greenCross >= 200){
+    redCross = 255
+    greenCar = 255
+    active = 0
+}
