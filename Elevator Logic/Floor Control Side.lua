@@ -1,30 +1,28 @@
 @name Elevator Logic (Floor Reciver + Counter)
-@inputs Floor 1n 2n 3n 4n Recv islowwerfl isUpperFl
+@inputs Floor 1n 2n 3n 4n Recv islowwerfl isUpperFl Near _destinationFloor
 @outputs UP DOWN NEXT 1o 2o 3o 4o DEFA
 
     1o = 1n; 2o =2n; 3o = 3n; 4o = 4n;
 
-
-if(1n <= 1 || 2n <= 1 || 3n <= 1 || 4n <= 1){
-else if(1n <= 1 && isupperfl == 1) {
+if(destinationFloor > _currentFloor){
     UP = 1;
-    
-}
-            else if(4n <= 1 && islowwerfl == 1 && QNEXTUP != 1){
-    DOWN();
-}
-                    else if(3n <= 1 && islowwerfl == 1 && QNEXTUP != 1){
-    DOWN();
-}
-                        else if(2n <= 1 && islowwerfl == 1 && QNEXTUP != 1){
-    DOWN();
-}
-                            else if(1n <= 1 && islowwerfl == 1 && QNEXTUP != 1){
-    DOWN();
-}
+    Speed = 255;
+    if(Near $= 1 && _currentFloor == destinationFloor){
+        Speed = 100;
+        if(Near $= 1 && _currentFloor == destinationFloor && stop == 1){
+            Speed = 0;
+        }
+    }
 
-if(2n <= 1 && isUpperFl == 1 && RECV < 2 ){
-    UP();
-}
 
-    
+}
+else if(destinationFloor < _currentFloor){
+    DOWN = 1;
+    Speed = 255;
+    if(Near $= 1 && _currentFloor == destinationFloor){
+        Speed = 100;
+        if(Near $= 1 && _currentFloor == destinationFloor && stop $= 1){
+            Speed = 0;
+        }
+    }
+}
