@@ -1,49 +1,26 @@
-@name Count down
-@inputs CrossTimmers Roadtimer Timmerstart 
-@outputs CrossCountdowntime RoadCountDown State ResetRoad ResetCross Active Debut CrossLimit RoadLimit
+@name Thai-Crossing Sign
+@inputs Triger State
+@outputs Cartimmer Crosstimer Timmerstart CDown RedCar RedCross YellowCross GreenCar GreenCross
 
-CrossCountdowntime = CrossTimmers - CrossLimit
-RoadCountDown = Roadtimer - RoadLimit
 
-if(Timmerstart == 1 ){
-Active = 1
-CrossLimit = 13
-RoadLimit = 10
-ResetCross = 0
-ResetRoad = 0
-
-if(State == 0 || State == 4){
-State = 1
-Debut = 1}
+if(State == 1 || State == 4 || State == 0){
+    RedCar = 0
+    RedCross = 255
+    YellowCross = 0
+    GreenCar = 255
+    GreenCross = 0
 }
-
-else{
-    CrossLimit = 0
-RoadLimit = 0
-State = 0
+elseif(State == 2){
+    RedCar = 0
+    RedCross = 255
+    YellowCross = 255
+    GreenCar = 0
+    GreenCross = 0
 }
-if(State == 4){
-    CrossLimit = 0
-    RoadLimit = 0
-    State = 0
-}
-if(Roadtimer >= 1 && State > 0)
-if((Roadtimer >= 9.8 && State == 1) || Debut == 3){
-    Debut = 3
-    RoadLimit = 3
-    State = 2
-}
-if((CrossTimmers >= 12.8 && State == 2) || Debut == 4 ){
-    Debut = 4
-    CrossLimit = 1
-    CrossLimit = 10
-    RoadLimit = 1
-    RoadLimit = 13
-    State = 3
-}
-if((Roadtimer >= 12.8 && State == 3) || Debut == 5 ){
-    Debut = 5
-    Active = 0
-    State = 4
-    
+elseif(State == 3){
+    RedCar = 255
+    RedCross = 0
+    YellowCross = 0
+    GreenCar = 0
+    GreenCross = 255
 }
