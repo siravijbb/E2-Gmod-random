@@ -1,6 +1,6 @@
 @name Thai-Crossing Sign
 @inputs Triger State
-@outputs Cartimmer Crosstimer Timmerstart CDown RedCar RedCross YellowCross GreenCar GreenCross State
+@outputs Cartimmer Crosstimer Timmerstart CDown RedCar RedCross YellowCross GreenCar GreenCross
 
 if(Triger == 1){
     Active = 1
