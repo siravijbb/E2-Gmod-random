@@ -24,3 +24,9 @@ elseif(State == 3){
     GreenCar = 0
     GreenCross = 255
 }
+elseif(State == 3.5){
+    RedCar = 255
+    RedCross = 255
+    YellowCross = 0
+    GreenCar = 0
+    GreenCross = 0}

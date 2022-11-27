@@ -33,14 +33,22 @@ if((Roadtimer >= 9.8 && State == 1) || Debut == 3){
 }
 if((CrossTimmers >= 12.8 && State == 2) || Debut == 4 ){
     Debut = 4
-    CrossLimit = 1
+    CrossLimit = 0
     CrossLimit = 10
-    RoadLimit = 1
-    RoadLimit = 13
+    RoadLimit = 0
+    RoadLimit = 16
     State = 3
 }
+
 if((Roadtimer >= 12.8 && State == 3) || Debut == 5 ){
     Debut = 5
+    CrossLimit = 0
+    CrossLimit = 3
+    State = 3.5
+    
+}
+if((Roadtimer >= 15.8 && State == 3.5) || Debut == 6 ){
+    Debut = 6
     Active = 0
     State = 4
     
