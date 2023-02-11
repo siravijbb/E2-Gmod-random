@@ -12,7 +12,7 @@ if(Reset == 1){
     Debut = 1
     }
 
-if(Timmerstart == 1 ){
+if(Timmerstart == 1 && Debut != 6.6 ){
 Active = 1
 CrossLimit = 13
 RoadLimit = 10
