@@ -45,6 +45,30 @@ if(EmerbrakeCounter == 1 && Active == 1){
     EmerbrakeCounter = 1
     print("Emergency Brake has been Apply.")
 }
+
+########
+if(Nextspeed == 0){
+    speedLatch = 0
+
+}    
+else{
+    speedLatch = 1
+    latchSpeedTimer = 1
+}
+if(speedLatch == 1){
+    SpeedKMH == speedCapture
+}
+if (speedLatch == 0 && latchSpeedTimer == 1){
+    timer("reduceSpeed",10000)
+    latchSpeedTimer = 0
+}
+if(clk(reduceSpeed) && ((SpeedKMH >= speedCapture) || (SpeedKMH >= 30))   ){
+    stoptimer("reduceSpeed")
+    print("Speed Brake has been Apply,Due to not stoping for RED")
+    Brake = 100
+}
+######
+
 if(LimitSpeed <= SpeedKMH && LimitSpeed+10 >= SpeedKMH){
     Brake = 100
 

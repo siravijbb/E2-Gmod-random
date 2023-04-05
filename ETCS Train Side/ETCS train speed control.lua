@@ -1,11 +1,21 @@
 @name ETCS train speed control
-@inputs  Nowspeedin Nextspeedin 
-@outputs Nextspeed Nowspeed Buzzer
+@inputs  speedIn speedSelect SpeedKMH
+@outputs Nextspeed Nowspeed
 
 Nowspeed = 1
 Nextlimit =1
 LimitSpeed =1
-Buzzer = 0
+
+if(speedSelect == 1){
+    Nowspeedin == speedIn
+}
+elseif(speedSelect == 0){
+    speedIn == 0
+}
+elseif(speedSelect == 2){
+    Nextspeedin == speedIn
+}
+
 
 if(Nowspeedin > Nextspeed){
     Nowspeed = Nowspeedin
