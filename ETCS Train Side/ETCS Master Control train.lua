@@ -62,7 +62,7 @@ if (speedLatch == 0 && latchSpeedTimer == 1){
     timer("reduceSpeed",10000)
     latchSpeedTimer = 0
 }
-if(clk(reduceSpeed) && ((SpeedKMH >= speedCapture) || (SpeedKMH >= 30))   ){
+if(clk(reduceSpeed) && ((SpeedKMH >= speedCapture) || (SpeedKMH >= 50))   ){
     stoptimer("reduceSpeed")
     print("Speed Brake has been Apply,Due to not stoping for RED")
     Brake = 100

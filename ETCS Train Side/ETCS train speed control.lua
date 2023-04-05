@@ -9,13 +9,13 @@ LimitSpeed =1
 if(speedSelect == 1){
     Nowspeedin == speedIn
 }
-elseif(speedSelect == 0){
-    speedIn == 0
-}
+
 elseif(speedSelect == 2){
     Nextspeedin == speedIn
 }
-
+elseif(speedSelect == 0){
+    speedIn == 0
+}
 
 if(Nowspeedin > Nextspeed){
     Nowspeed = Nowspeedin
