@@ -1,0 +1,125 @@
+// Pin assignments
+const int redPin = 9;
+const int greenPin = 10;
+const int bluePin = 11;
+const int button1Pin = 2;
+const int button2Pin = 3;
+
+// State variables
+int currentColor = 0;
+bool button1Pressed = false;
+bool button2Pressed = false;
+unsigned long button1PressTime = 0;
+unsigned long button2PressTime = 0;
+
+void setup() {
+Serial. begin(9600);
+  // Set pin modes
+pinMode(redPin, OUTPUT);
+pinMode(greenPin, OUTPUT);
+pinMode(bluePin, OUTPUT);
+pinMode(button1Pin, INPUT_PULLUP);
+pinMode(button2Pin, INPUT_PULLUP);
+  Serial.print("22");
+
+// Turn off all lights initially
+analogWrite(redPin, 0);
+analogWrite(greenPin, 0);
+analogWrite(bluePin, 0);
+}
+
+void loop() {
+// Read button states
+bool newButton1Pressed = digitalRead(button1Pin) == LOW;
+bool newButton2Pressed = digitalRead(button2Pin) == LOW;
+
+// Handle button1 press
+if (newButton1Pressed && !button1Pressed) {
+Serial.print("1");
+  button1Pressed = true;
+button1PressTime = millis();
+
+// Change to next color
+currentColor++;
+if (currentColor > 5) {
+  currentColor = 0;
+}
+}
+
+// Handle button2 press
+if (newButton2Pressed && !button2Pressed) {
+button2Pressed = true;
+button2PressTime = millis();
+
+
+// Change to previous color
+currentColor--;
+if (currentColor < 0) {
+  currentColor = 5;
+}
+}
+
+// Handle button1 long press
+if (button1Pressed && !newButton1Pressed && millis() - button1PressTime > 5000) {
+Serial.print("End");
+  analogWrite(redPin, 0);
+analogWrite(greenPin, 0);
+analogWrite(bluePin, 0);
+currentColor = 0;
+}
+
+// Handle button2 long press
+if (button2Pressed && !newButton2Pressed && millis() - button2PressTime > 5000) {
+Serial.print("End");
+  analogWrite(redPin, 0);
+analogWrite(greenPin, 0);
+analogWrite(bluePin, 0);
+currentColor = 0;
+}
+
+// Set colors based on currentColor
+switch (currentColor) {
+case 0:
+Serial.print("Case1");
+  analogWrite(redPin, 0);
+analogWrite(greenPin, 0);
+analogWrite(bluePin, 0);
+break;
+case 1:
+analogWrite(redPin, 255);
+analogWrite(greenPin, 0);
+analogWrite(bluePin, 0);
+break;
+case 2:
+analogWrite(redPin, 255);
+analogWrite(greenPin, 128);
+analogWrite(bluePin, 0);
+break;
+case 3:
+analogWrite(redPin, 255);
+analogWrite(greenPin, 255);
+analogWrite(bluePin, 0);
+break;
+case 4:
+analogWrite(redPin, 0);
+analogWrite(greenPin, 255);
+analogWrite(bluePin, 0);
+break;
+case 5:
+analogWrite(redPin, 0);
+analogWrite(greenPin, 0);
+analogWrite(bluePin, 255);
+break;
+}
+
+// Update button state variables
+if (!newButton1Pressed) {
+button1Pressed = false;
+}
+if (!newButton2Pressed) {
+button2Pressed = false;
+}
+
+// Delay to debounce buttons
+delay(50);
+}
