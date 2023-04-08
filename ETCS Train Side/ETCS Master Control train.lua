@@ -1,6 +1,6 @@
 @name ETCS train side
 @inputs  Nowspeed Nextspeed W S A D Space Deadman SpeedKMH Active
-@outputs Brake Emerbrake Speed LimitSpeed Buzzer BuzzerEmer Sector ReadM Nextlimit EmerbrakeCounter Forward Reverse WriteNow WriteNext ReadNow ReadNext
+@outputs Brake Emerbrake Speed LimitSpeed Buzzer BuzzerEmer Sector ReadM Nextlimit EmerbrakeCounter Forward Reverse WriteNow WriteNext ReadNow ReadNext SpeedCapture
 Deadtime = 120000
 Sector = 1
 ReadM = 1

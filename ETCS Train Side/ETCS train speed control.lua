@@ -2,26 +2,30 @@
 @inputs  SpeedIn SpeedSelect SpeedKMH
 @outputs Nextspeed Nowspeed
 
-Nowspeed = 1
-Nextlimit =1
-LimitSpeed =1
 
 if(SpeedSelect == 1){
-    Nowspeedin == SpeedIn
+    Nowspeed = SpeedIn
 }
 
 elseif(SpeedSelect == 2){
-    Nextspeedin == speedIn
+    Nextspeed = SpeedIn
 }
 elseif(SpeedSelect == 0){
-    SpeedIn == 0
+    SpeedIn = 0
 }
+if($Nextspeed || $Nowspeed){
+    TextLatch2A = 1
+    TextLatch2B = 1
+}
+if(Nowspeed > Nextspeed && SpeedSelect == 3){
 
-if(Nowspeedin > Nextspeed){
-    Nowspeed = Nowspeedin
-    Nextspeed = Nextspeedin
-    print("2A REDUCE SPEED")}
-if(Nextspeedin > Nowspeed){
-    Nowspeed = Nextspeedin
-    Nextspeed = Nextspeedin
-    print("2B SPEED CHANGED")}
+    if(TextLatch2A == 1){
+    print("2A REDUCE SPEED")
+    TextLatch2A = 0}                        
+    }
+if(Nextspeed > Nowspeed && SpeedSelect == 3){
+
+    if(TextLatch2B == 1){
+    print("2B SPEED CHANGED")
+    TextLatch2B = 0}
+    }
