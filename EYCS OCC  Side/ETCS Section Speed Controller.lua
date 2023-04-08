@@ -1,18 +1,18 @@
-@name ETCS train side
-@inputs  Nowspeedin Nextspeedin sectionSelect inNextOveride nextspeedNextSign
+@name ETCS Track Side
+@inputs  Nowspeedin Nextspeedin SectionSelect InNextOveride NextspeedNextSign
 @outputs Nowspeed Nextspeed ETCSOutspeed
 
 ETCSOutspeed = Nowspeed
-sectionNumber = 1 #Change as section
-nextOveride = inNextOveride
-Nextspeed = nextspeedNextSign
+SectionNumber = 1 #Change as section
+NextOveride = InNextOveride
+Nextspeed = NextspeedNextSign
 
-if(sectionSelect == sectionNumber){
+if(SectionSelect == SectionNumber){
     Nowspeed = Nowspeedin
-    if(nextOveride == 1){ 
+    if(NextOveride == 1){ 
         Nextspeed = Nextspeedin ##overide next sign speed
     }
     else{
-        Nextspeed = nextspeedNextSign
+        Nextspeed = NextspeedNextSign
     }
 }

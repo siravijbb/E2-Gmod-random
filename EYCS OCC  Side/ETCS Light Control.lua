@@ -1,4 +1,4 @@
-@name ETCS Cross Light
+@name ETCS Light
 @inputs ETCSOutspeed
 @outputs Blink Red Green Yellow ETCSOutspeed
 
