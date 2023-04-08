@@ -48,22 +48,22 @@ if(EmerbrakeCounter == 1 && Active == 1){
 
 ########
 if(Nextspeed == 0){
-    speedLatch = 0
+    SpeedLatch = 0
 
 }    
 else{
-    speedLatch = 1
-    latchSpeedTimer = 1
+    SpeedLatch = 1
+    LatchSpeedTimer = 1
 }
-if(speedLatch == 1){
-    SpeedKMH == speedCapture
+if(SpeedLatch == 1){
+     SpeedCapture = SpeedKMH
 }
-if (speedLatch == 0 && latchSpeedTimer == 1){
-    timer("reduceSpeed",10000)
-    latchSpeedTimer = 0
+if (SpeedLatch == 0 && LatchSpeedTimer == 1){
+    timer("ReduceSpeed",10000)
+    LatchSpeedTimer = 0
 }
-if(clk(reduceSpeed) && ((SpeedKMH >= speedCapture) || (SpeedKMH >= 50))   ){
-    stoptimer("reduceSpeed")
+if(clk("ReduceSpeed") && ((SpeedKMH >= SpeedCapture) || (SpeedKMH >= 50))   ){
+    stoptimer("ReduceSpeed")
     print("Speed Brake has been Apply,Due to not stoping for RED")
     Brake = 100
 }
@@ -104,5 +104,3 @@ if(LimitSpeed == 0 && SpeedKMH <= 3){
 if(SpeedKMH <= 2){ 
     Brake = 100
 }
-
-
