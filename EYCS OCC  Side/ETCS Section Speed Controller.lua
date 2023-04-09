@@ -2,7 +2,7 @@
 @inputs  Nowspeedin Nextspeedin SectionSelect InNextOveride NextspeedNextSign
 @outputs Nowspeed Nextspeed ETCSOutspeed
 
-ETCSOutspeed = Nowspeed
+ETCSOutspeed = Nowspeedin
 SectionNumber = 1 #Change as section
 NextOveride = InNextOveride
 Nextspeed = NextspeedNextSign
