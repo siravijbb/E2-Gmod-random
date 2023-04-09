@@ -8,13 +8,13 @@ if(20 >= ETCSOutspeed && ETCSOutspeed != 0 ){
     Green = 0
     Blinkcounter = 0
 }
-elseif(40 >= ETCSOutspeed >    20){
+elseif(40 > ETCSOutspeed && ETCSOutspeed >=    20){
     Red = 0
     Yellow = 255
     Green = 0
     Blinkcounter = 0
 }
-elseif(40 <= ETCSOutspeed >= 60){
+elseif(60 > ETCSOutspeed && ETCSOutspeed >= 40){
     Red = 0
     Yellow = 255
     Green = 255
