@@ -9,10 +9,11 @@ Nextspeed = NextspeedNextSign
 
 if(SectionSelect == SectionNumber){
     Nowspeed = Nowspeedin
+    OldNowspeed = Nowspeedin
     if(NextOveride == 1){ 
         Nextspeed = Nextspeedin ##overide next sign speed
-    }
-    else{
+    }}
+else{
         if(NextspeedNextSign == 0 && NextOveride == 0){
         OldNowspeed = Nowspeed
         Nowspeed = 30}
@@ -20,5 +21,5 @@ if(SectionSelect == SectionNumber){
         Nowspeed = OldNowspeed}  
         Nextspeed = NextspeedNextSign
     }
-}
+
 
