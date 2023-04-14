@@ -13,12 +13,12 @@ if(SectionSelect == SectionNumber){
         Nextspeed = Nextspeedin ##overide next sign speed
     }
     else{
-        Nextspeed = NextspeedNextSign
         if(NextspeedNextSign == 0 && NextOveride == 0){
         OldNowspeed = Nowspeed
         Nowspeed = 30}
         else{
         Nowspeed = OldNowspeed}  
+        Nextspeed = NextspeedNextSign
     }
 }
 
