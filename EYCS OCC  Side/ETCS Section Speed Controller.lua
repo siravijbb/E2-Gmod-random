@@ -69,7 +69,11 @@ if(CrossingGate == 1){
         CrossBlink = 0
     }
 }
-
+else{
+    stoptimer("Blink")
+    stoptimer("BlinkClose")
+    CrossBlink = 0
+}
 if(CrossBlink == 1){
     Blink = 255
     }
