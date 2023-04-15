@@ -14,10 +14,10 @@ if(SectionSelect == SectionNumber){
         Nextspeed = Nextspeedin ##overide next sign speed
     }}
 else{
-    if($AxelCounter){
-    Nowspeed = 0
-    }
-    elseif(NextsecondspeedNextSign == 0 && NextOveride == 0){ ##if next second sign is 0
+        if($AxelCounter || (NextspeedNextSign == 0 && NextOveride == 0)){
+        Nowspeed = 0
+        }
+        elseif(NextsecondspeedNextSign == 0 && NextOveride == 0){ ##if next second sign is 0
         OldNowspeed = Nowspeed
         Nowspeed = 30}
         else{ ##if next  sign is not 0
