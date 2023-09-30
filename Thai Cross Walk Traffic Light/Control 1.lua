@@ -2,8 +2,16 @@
 @inputs CrossTimmers Roadtimer Timmerstart Reset ForceRed ExitRed
 @outputs CrossCountdowntime RoadCountDown State ResetRoad ResetCross Active Debut CrossLimit RoadLimit
 
+Rroadtime = 20; 
+Groadtime = 20;     
+
+Rcrosstime = 20; 
+Gcrosstime = 20;    
+
 CrossCountdowntime = CrossTimmers - CrossLimit
 RoadCountDown = Roadtimer - RoadLimit
+
+
 
 if(Reset == 1){
     CrossLimit = 0
@@ -14,8 +22,8 @@ if(Reset == 1){
 
 if(Timmerstart == 1 && Debut != 6.6 ){
 Active = 1
-CrossLimit = 13
-RoadLimit = 10
+CrossLimit = Rroadtime +3;
+RoadLimit = Rroadtime
 ResetCross = 0
 ResetRoad = 0
 
@@ -34,28 +42,28 @@ State = 0
 }
 
 
-if((Roadtimer >= 9.8 && State == 1) || Debut == 3){
+if((Roadtimer >= (Rroadtime -0.2) && State == 1) || Debut == 3){
     Debut = 3
     RoadLimit = 3
     State = 2
 }
-if((CrossTimmers >= 12.8 && State == 2) || Debut == 4 ){
+if((CrossTimmers >= (2.8) && State == 2) || Debut == 4 ){
     Debut = 4
     CrossLimit = 0
-    CrossLimit = 10
+    CrossLimit = Gcrosstime;
     RoadLimit = 0
-    RoadLimit = 16
+    RoadLimit = Groadtime +6;
     State = 3
 }
 
-if((Roadtimer >= 12.8 && State == 3) || Debut == 5 ){
+if((CrossTimmers >= (Gcrosstime -0.2) && State == 3) || Debut == 5 ){
     Debut = 5
     CrossLimit = 0
     CrossLimit = 3
     State = 3.5
     
 }
-if((Roadtimer >= 15.8 && State == 3.5) || Debut == 6 ){
+if((Roadtimer >= (Groadtime +5.8) && State == 3.5) || Debut == 6 ){
     Debut = 6
     Active = 0
     State = 4

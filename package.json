@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "format": "prettier --plugin-search-dir . --write ."
+  },
+  "devDependencies": {
+    "@prettier/plugin-lua": "^0.0.3",
+    "prettier": "^3.0.3"
+  }
+}
