@@ -6,10 +6,9 @@ CrossCountdowntime = CrossTimmers - CrossLimit
 RoadCountDown = Roadtimer - RoadLimit
 
 if(Reset == 1){
-    CrossLimit = 0
-    RoadLimit = 0
-    State = 0
-    Debut = 1
+    Debut = 6
+    Active = 0
+    State = 4
     }
 
 if(Timmerstart == 1 && Debut != 6.6 ){
