@@ -23,7 +23,7 @@ State = 1
 Debut = 1}
 
 }
-if(Roadtimer >= 1 || 4 > State > 0){
+if(Roadtimer >= 1 || (4 > State > 0 && Debut != 6.6)){
     Active = 1
 }
 elseif(Active != 0){
@@ -73,6 +73,7 @@ if(ForceRed == 1 && Roadtimer <= 2 && Debut != 6.6 || Debut == 5.5){
         State = 2.25
     if((Roadtimer >= RoadLimit - 0.2) || Debut == 6.6 ){
         Debut = 6.6
+        Active = 0
         State = 3.25
         RoadLimit = 0
        
@@ -82,10 +83,9 @@ if(ForceRed == 1 && Roadtimer <= 2 && Debut != 6.6 || Debut == 5.5){
  if((ExitRed == 1  )|| Debut == 7 ){
         Debut = 7    
         CrossLimit = 3
-            if(CrossTimmers >= (CrossLimit - 0.2) || Debut == 7.5){
-                Debut = 7.5
-                State = 0
-                CrossLimit = 0
-                Debut = 1
+        if(CrossTimmers >= (CrossLimit - 0.2) || Debut == 7.5){
+            Debut = 6
+            Active = 0
+            State = 4
             }
         }
