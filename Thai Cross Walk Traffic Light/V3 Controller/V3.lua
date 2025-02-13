@@ -1,11 +1,12 @@
 @name Road-Traffic Light Count down
-@inputs Centraltimer  Button  ResetAll RedHold ForceRedButton Exitred
-@outputs Centraltimerenable ResetCentraltimer RoadCountDown CrossCountdown State Reset Centraltimerreset ForceRed
+@inputs Centraltimer  Button  ResetAll  ForceRedButton Exitred PersonDetected
+@outputs Centraltimerenable RoadCountDown CrossCountdown State Reset Centraltimerreset ForceRed MoreCrossTime
 
 
 GbeforeYellow = 13
 YellowCar = 3 + GbeforeYellow
-GreenCross = 10 + YellowCar
+
+GreenCross = 10 + YellowCar 
 HoldRed = 3 + GreenCross
 
 ForceYellowCar = 3
@@ -65,7 +66,7 @@ if(HoldRed < Centraltimer  && ForceRed == 0){
     CrossCountdown = 0
     Centraltimerenable = 0
     Centraltimerreset = 1
-    
+    MoreCrossTime = 0
 }
 
 if(ForceRedButton > 0){
