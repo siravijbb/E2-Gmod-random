@@ -1,10 +1,10 @@
 @name Road-Traffic Light Count down
-@inputs Centraltimer  Button  ResetAll  ForceRedButton Exitred PersonDetected
+@inputs Centraltimer  Button  ResetAll  ForceRedButton Exitred PersonDetected YellowBlink
 @outputs Centraltimerenable RoadCountDown CrossCountdown State Reset Centraltimerreset ForceRed MoreCrossTime PersonDetected
 
 
-GbeforeYellow = 16
-YellowCar = 3 + GbeforeYellow
+GbeforeBlankTime = 16
+BlankTimeCar = 3 + GbeforeBlankTime
 if((State == 1 || State == 2) && PersonDetected == 0){
     MoreCrossTime = 0
 }
@@ -15,11 +15,11 @@ if((State == 1 || State == 2) && 3 <= PersonDetected ){
     MoreCrossTime = 10
 }
 
-GreenCross = 5 + YellowCar + MoreCrossTime
+GreenCross = 5 + BlankTimeCar + MoreCrossTime
 HoldRed = 3 + GreenCross
 
-ForceYellowCar = 3
-ForceStopCross = ForceYellowCar + 5
+ForceBlankTimeCar = 3
+ForceStopCross = ForceBlankTimeCar + 5
 
 State = 1
 
@@ -49,17 +49,17 @@ if(ResetAll > 0){
     State = 1
 }
 
-if(Centraltimer < GbeforeYellow && ForceRed == 0 && Centraltimerenable > 0){
+if(Centraltimer < GbeforeBlankTime && ForceRed == 0 && Centraltimerenable > 0){
     State = 1
-    RoadCountDown = GbeforeYellow - Centraltimer
-    CrossCountdown =  YellowCar - Centraltimer
+    RoadCountDown = GbeforeBlankTime - Centraltimer
+    CrossCountdown =  BlankTimeCar - Centraltimer
 }
-if(GbeforeYellow < Centraltimer && Centraltimer < YellowCar && ForceRed == 0){
+if(GbeforeBlankTime < Centraltimer && Centraltimer < BlankTimeCar && ForceRed == 0){
     State = 2
-    RoadCountDown = YellowCar - Centraltimer
-    CrossCountdown = YellowCar - Centraltimer
+    RoadCountDown = BlankTimeCar - Centraltimer
+    CrossCountdown = BlankTimeCar - Centraltimer
 }
-if(YellowCar <= Centraltimer && Centraltimer < GreenCross && ForceRed == 0){
+if(BlankTimeCar <= Centraltimer && Centraltimer < GreenCross && ForceRed == 0){
     State = 3
     RoadCountDown = HoldRed - Centraltimer
     CrossCountdown = GreenCross - Centraltimer
@@ -85,11 +85,12 @@ if(ForceRedButton > 0){
 
 
 }
-if(0 < Centraltimer && Centraltimer < ForceYellowCar && ForceRed == 1){
-    RoadCountDown = ForceYellowCar  - Centraltimer
+if(0 < Centraltimer && Centraltimer < ForceBlankTimeCar && ForceRed == 1){
+    RoadCountDown = ForceBlankTimeCar  - Centraltimer
     State = 2
+
 }
-if(Centraltimer > ForceYellowCar  && ForceRed == 1){
+if(Centraltimer > ForceBlankTimeCar  && ForceRed == 1){
     Centraltimerenable = 0
     RoadCountDown = 0
     State = 3
@@ -106,7 +107,7 @@ if(Exitred > 0){
 
     
 }
-if(ForceYellowCar  <= Centraltimer && Centraltimer < ForceStopCross && ForceRed == -1){
+if(ForceBlankTimeCar  <= Centraltimer && Centraltimer < ForceStopCross && ForceRed == -1){
     Centraltimerenable = 1
     CrossCountdown = ForceStopCross  - Centraltimer
         State = 3
@@ -121,3 +122,31 @@ if(Centraltimer > ForceStopCross  && ForceRed == -1){
     ForceRed = 0
 
 }
+
+
+BlankTime = 1
+YellowTime = BlankTime + BlankTime
+if(YellowBlink > 0){
+    Centraltimerreset = 0
+    ForceRed = -2
+    Centraltimerenable = 1
+    State = 5
+    RoadCountDown = 0
+    CrossCountdown = 0
+    if(Centraltimer < BlankTime && ForceRed == -2){
+        State = 2
+    }elseif(Centraltimer > BlankTime && Centraltimer < YellowTime && ForceRed == -2){
+        State = 5
+    }elseif(Centraltimer >= YellowTime && ForceRed == -2){
+        Centraltimerreset = 1
+        
+    }
+
+}
+elseif(YellowBlink == 0 && ForceRed == -2){
+    Centraltimerenable = 0
+    Centraltimerreset = 1
+    ForceRed = 0
+    
+}
+
